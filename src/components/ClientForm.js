@@ -1,5 +1,18 @@
 import React, { useState } from 'react';
 
+const COUNTRIES = [
+  { code: 'IN', name: 'India' },
+  { code: 'US', name: 'United States' },
+  { code: 'GB', name: 'United Kingdom' },
+  { code: 'CA', name: 'Canada' },
+  { code: 'AU', name: 'Australia' },
+  { code: 'AE', name: 'UAE' },
+  { code: 'DE', name: 'Germany' },
+  { code: 'FR', name: 'France' },
+  { code: 'SG', name: 'Singapore' },
+  { code: '',   name: 'Other / Prefer not to specify' }
+];
+
 function blank(){
   return {
     name: '',
@@ -15,7 +28,11 @@ export default function ClientForm({ onAdd, initial }){
 
   function change(e){
     const { name, value } = e.target;
-    setForm(prev => ({...prev, [name]: name === 'name' || name === 'country' ? value : Number(value)}));
+    // country and name remain strings; others numbers
+    setForm(prev => ({
+      ...prev,
+      [name]: (name === 'name' || name === 'country') ? value : Number(value)
+    }));
   }
 
   function submit(e){
@@ -31,29 +48,33 @@ export default function ClientForm({ onAdd, initial }){
 
   return (
     <form onSubmit={submit}>
-      <div style={{display:'flex', gap:12, flexWrap:'wrap'}}>
-        
-        <div>
+      <div className="form-row">
+
+        <div className="field">
           <label className="small">Client Name</label>
-          <input className="input" name="name" value={form.name} onChange={change} />
+          <input className="input" name="name" value={form.name} onChange={change} placeholder="e.g., Aman Kumar" />
         </div>
 
-        <div>
+        <div className="field">
           <label className="small">Country</label>
-          <input className="input" name="country" value={form.country} onChange={change} />
+          <select className="select" name="country" value={form.country} onChange={change}>
+            {COUNTRIES.map(c => (
+              <option key={c.code || c.name} value={c.name}>{c.name}</option>
+            ))}
+          </select>
         </div>
 
-        <div>
+        <div className="field">
           <label className="small">Sessions Needed</label>
           <input className="input" type="number" min="1" name="sessionsRequired" value={form.sessionsRequired} onChange={change} />
         </div>
 
-        <div>
+        <div className="field">
           <label className="small">Sessions Completed</label>
           <input className="input" type="number" min="0" name="completedSessions" value={form.completedSessions} onChange={change} />
         </div>
 
-        <div>
+        <div className="field">
           <label className="small">Amount Already Paid (₹)</label>
           <input className="input" type="number" min="0" name="paidAmount" value={form.paidAmount} onChange={change} />
         </div>

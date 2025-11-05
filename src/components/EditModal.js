@@ -1,11 +1,24 @@
 import React, { useState } from 'react';
 
+const COUNTRIES = [
+  { code: 'IN', name: 'India' },
+  { code: 'US', name: 'United States' },
+  { code: 'GB', name: 'United Kingdom' },
+  { code: 'CA', name: 'Canada' },
+  { code: 'AU', name: 'Australia' },
+  { code: 'AE', name: 'UAE' },
+  { code: 'DE', name: 'Germany' },
+  { code: 'FR', name: 'France' },
+  { code: 'SG', name: 'Singapore' },
+  { code: '',   name: 'Other / Prefer not to specify' }
+];
+
 export default function EditModal({ client, onClose, onSave }){
   const [form, setForm] = useState({...client});
 
   function change(e){
     const { name, value } = e.target;
-    setForm(prev => ({...prev, [name]: name==='name' || name==='country' ? value : Number(value)}));
+    setForm(prev => ({...prev, [name]: (name==='name' || name==='country') ? value : Number(value)}));
   }
 
   function submit(e){
@@ -27,29 +40,33 @@ export default function EditModal({ client, onClose, onSave }){
         <h3 style={{marginTop:0}}>Edit client</h3>
         <form onSubmit={submit}>
           <div className="form-row">
-            <div>
+            <div className="field">
               <label className="small">Client Name</label>
               <input className="input" name="name" value={form.name} onChange={change} />
             </div>
 
-            <div>
+            <div className="field">
               <label className="small">Country</label>
-              <input className="input" name="country" value={form.country} onChange={change} />
+              <select className="select" name="country" value={form.country} onChange={change}>
+                {COUNTRIES.map(c => (
+                  <option key={c.code || c.name} value={c.name}>{c.name}</option>
+                ))}
+              </select>
             </div>
           </div>
 
           <div className="form-row">
-            <div>
+            <div className="field">
               <label className="small">Sessions Needed</label>
               <input className="input" type="number" min="1" name="sessionsRequired" value={form.sessionsRequired} onChange={change} />
             </div>
 
-            <div>
+            <div className="field">
               <label className="small">Sessions Completed</label>
               <input className="input" type="number" min="0" name="completedSessions" value={form.completedSessions} onChange={change} />
             </div>
 
-            <div>
+            <div className="field">
               <label className="small">Amount Paid (₹)</label>
               <input className="input" type="number" min="0" name="paidAmount" value={form.paidAmount} onChange={change} />
             </div>
