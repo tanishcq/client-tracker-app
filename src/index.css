@@ -1,13 +1,107 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+:root{
+  --bg: #f6f8fb;
+  --card: #ffffff;
+  --muted: #6b7280;
+  --accent: #2563eb;
+  --danger: #ef4444;
 }
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family: Inter, Roboto, system-ui, -apple-system, 'Segoe UI', 'Helvetica Neue', Arial;
+  background:var(--bg);
+  color:#111827;
+}
+.app {
+  padding:24px;
+  max-width:1000px;
+  margin:24px auto;
+}
+.header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  margin-bottom:18px;
+}
+.card{
+  background:var(--card);
+  padding:16px;
+  border-radius:10px;
+  box-shadow: 0 6px 18px rgba(17,24,39,0.06);
+}
+.form-row{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-bottom:8px;
+}
+.input, .select {
+  padding:8px 10px;
+  border-radius:8px;
+  border:1px solid #e6e9ef;
+  min-width:160px;
+}
+.btn{
+  background:var(--accent);
+  color:white;
+  border:none;
+  padding:8px 12px;
+  border-radius:8px;
+  cursor:pointer;
+}
+.btn.secondary{
+  background: #111827;
+  opacity:0.08;
+  color:#111827;
+}
+.btn.ghost{
+  background:transparent;
+  border:1px solid #e6e9ef;
+  color:#111827;
+}
+.client-list{
+  margin-top:16px;
+  display:grid;
+  gap:12px;
+}
+.client-item{
+  display:flex;
+  gap:12px;
+  align-items:center;
+  justify-content:space-between;
+  padding:12px;
+}
+.meta{
+  display:flex;
+  gap:12px;
+  align-items:center;
+}
+.name{
+  font-weight:600;
+}
+.small{font-size:13px;color:var(--muted)}
+.badge{
+  background:#eef2ff;
+  color: #3730a3;
+  padding:6px 8px;
+  border-radius:8px;
+  font-weight:600;
+}
+.controls{display:flex; gap:8px; align-items:center;}
+.icon-btn{
+  padding:6px 8px;
+  border-radius:8px;
+  border:1px solid #e6e9ef;
+  background:white;
+  cursor:pointer;
+}
+.danger{background: #fff1f2; border-color:#fecaca;}
+.pay-input{width:120px}
+.footer{
+  margin-top:18px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  color:var(--muted);
 }
