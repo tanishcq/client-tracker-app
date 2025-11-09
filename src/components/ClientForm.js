@@ -13,13 +13,16 @@ const COUNTRIES = [
   { code: '',   name: 'Other / Prefer not to specify' }
 ];
 
+const SESSION_OPTIONS = [1,3,5,7,11,21];
+
 function blank(){
   return {
     name: '',
-    country: '',
-    sessionsRequired: 1,
+    country: 'India',
+    sessionsRequired: 3,
     completedSessions: 0,
-    paidAmount: 0
+    paidAmount: 0,
+    chargePerSession: 1000
   };
 }
 
@@ -28,7 +31,6 @@ export default function ClientForm({ onAdd, initial }){
 
   function change(e){
     const { name, value } = e.target;
-    // country and name remain strings; others numbers
     setForm(prev => ({
       ...prev,
       [name]: (name === 'name' || name === 'country') ? value : Number(value)
@@ -42,6 +44,7 @@ export default function ClientForm({ onAdd, initial }){
     if(form.completedSessions < 0) return alert('Completed sessions must be >= 0');
     if(form.completedSessions > form.sessionsRequired) form.completedSessions = form.sessionsRequired;
     if(form.paidAmount < 0) return alert('Paid amount must be >= 0');
+    if(form.chargePerSession < 800 || form.chargePerSession > 5100) return alert('Charge per session must be between ₹800 and ₹5100');
     onAdd(form);
     setForm(blank());
   }
@@ -66,12 +69,20 @@ export default function ClientForm({ onAdd, initial }){
 
         <div className="field">
           <label className="small">Sessions Needed</label>
-          <input className="input" type="number" min="1" name="sessionsRequired" value={form.sessionsRequired} onChange={change} />
+          <select className="select" name="sessionsRequired" value={form.sessionsRequired} onChange={change}>
+            {SESSION_OPTIONS.map(n => <option key={n} value={n}>{n}</option>)}
+          </select>
         </div>
 
         <div className="field">
-          <label className="small">Sessions Completed</label>
-          <input className="input" type="number" min="0" name="completedSessions" value={form.completedSessions} onChange={change} />
+          <label className="small">Sessions Completed (optional)</label>
+          <input className="input" type="number" min="0" max={form.sessionsRequired} name="completedSessions" value={form.completedSessions} onChange={change} />
+        </div>
+
+        <div className="field">
+          <label className="small">Charge per session (₹)</label>
+          <input className="input" type="number" min="800" max="5100" name="chargePerSession" value={form.chargePerSession} onChange={change} />
+          <div className="small">Allowed: ₹800 — ₹5100</div>
         </div>
 
         <div className="field">

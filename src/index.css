@@ -127,6 +127,18 @@ label.small{
   color:var(--muted);
 }
 
+/* session row inputs */
+.client-item .input[type="date"]{
+  padding:6px 8px;
+  height:36px;
+}
+.client-item .pay-input{ width:120px; }
+@media (max-width:720px){
+  .client-item { flex-direction: column; align-items:flex-start; gap:14px; }
+  .client-item .pay-input { width:100%; }
+}
+
+
 /* Responsive behavior: stack fields on small screens */
 @media (max-width: 720px) {
   .form-row {
@@ -140,3 +152,221 @@ label.small{
   .client-item { flex-direction: column; align-items:flex-start; gap:14px; }
   .pay-input { width:100%; }
 }
+
+/* compact session grid for collapsible area */
+.session-row-compact {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  padding: 6px 4px;
+}
+
+/* small index */
+.session-row-compact .session-index {
+  width: 18px;
+  text-align: right;
+  font-weight: 600;
+}
+
+/* compact date input */
+.date-input-compact {
+  padding: 6px 8px;
+  height: 34px;
+  width: 150px; /* narrow */
+  border-radius: 8px;
+  border: 1px solid #e6e9ef;
+  font-size: 13px;
+}
+
+/* compact checkbox + label */
+.session-check-compact {
+  display:flex;
+  align-items:center;
+  gap:6px;
+  margin-left: 8px;
+}
+
+/* collapse card adjustments */
+.client-item > .card {
+  box-shadow: none;
+}
+
+/* responsive: expand full width on small screens */
+@media (max-width: 720px) {
+  .date-input-compact { width: 140px; }
+  /* Position the expanded sessions area inline on small screens */
+  .client-item {
+    position: relative;
+  }
+  .client-item > div[style*="position: absolute"] {
+    position: static !important;
+    width: 100% !important;
+    margin-top: 10px;
+  }
+}
+
+/* Modal backdrop (covers viewport) */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(2,6,23,0.45);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index: 9999;
+  padding: 16px;
+}
+
+/* Modal card */
+.modal-card {
+  background: var(--card);
+  border-radius: 10px;
+  padding: 18px;
+  max-width: 880px;
+  width: 100%;
+  box-shadow: 0 10px 30px rgba(2,6,23,0.25);
+  max-height: 85vh;
+  overflow:auto;
+}
+
+/* compact session grid for collapsible area */
+.session-row-compact {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  padding: 6px 4px;
+}
+
+/* small index */
+.session-row-compact .session-index {
+  width: 18px;
+  text-align: right;
+  font-weight: 600;
+}
+
+/* compact date input */
+.date-input-compact {
+  padding: 6px 8px;
+  height: 34px;
+  width: 150px; /* narrow */
+  border-radius: 8px;
+  border: 1px solid #e6e9ef;
+  font-size: 13px;
+}
+
+/* compact checkbox + label */
+.session-check-compact {
+  display:flex;
+  align-items:center;
+  gap:6px;
+  margin-left: 8px;
+}
+
+/* responsive adjustments */
+@media (max-width: 720px) {
+  .date-input-compact { width: 140px; }
+  .modal-card { padding: 12px; }
+}
+
+/* ---------- Controls: consistent, neat, responsive ---------- */
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-end;
+  min-width: 260px;
+}
+
+/* make the "View sessions" full-width inside the control column */
+.control-group .btn-block {
+  width: 100%;
+  justify-content: center;
+  padding: 8px 12px;
+  border-radius: 10px;
+}
+
+/* payment row: input + button aligned and equal height */
+.payment-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  width: 100%;
+}
+
+/* make the input and button visually equal height */
+.payment-row .pay-input {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 40px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 1px solid #e6e9ef;
+}
+
+/* primary action style (Add) — distinct */
+.btn.primary {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  height: 40px;
+  border-radius: 10px;
+  box-shadow: 0 6px 12px rgba(37,99,235,0.12);
+}
+
+/* ghost button (View sessions) */
+.btn.ghost {
+  background: transparent;
+  border: 1px solid #e6e9ef;
+  color: #0f172a;
+  height: 40px;
+}
+
+/* small gap row (Edit/Delete) */
+.row.small-gap {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+/* Icon buttons (Edit/Delete) matched in height and style */
+.icon-btn {
+  min-width: 68px;
+  height: 36px;
+  padding: 6px 10px;
+  border-radius: 10px;
+  border: 1px solid #e6e9ef;
+  background: white;
+  cursor: pointer;
+}
+
+/* Danger button variant */
+.icon-btn.danger {
+  background: #fff5f5;
+  border-color: #fecaca;
+  color: #b91c1c;
+}
+
+/* Tweak Add button hover/active */
+.btn.primary:hover { transform: translateY(-1px); }
+.btn.primary:active { transform: translateY(0); }
+
+/* keep controls compact on small screens */
+@media (max-width: 720px) {
+  .control-group {
+    align-items: stretch;
+    width: 100%;
+    min-width: 0;
+  }
+  .payment-row { gap: 6px; }
+  .payment-row .pay-input { height: 44px; }
+  .btn.primary, .btn.ghost { height: 44px; }
+  .icon-btn { height: 40px; min-width: 64px; }
+}
+
+
+
+
